@@ -1,19 +1,47 @@
 package org.example;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        // Press Opt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        Scanner scanner = new Scanner(System.in);
 
-        // Press Ctrl+R or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        System.out.print("Enter the value of n: ");
+        int n = scanner.nextInt();
 
-            // Press Ctrl+D to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Cmd+F8.
-            System.out.println("i = " + i);
+        int result = sumOfPrimesWithDigit5(n);
+        System.out.println("The sum of prime numbers with the digit 5 from 0 to " + n + " is: " + result);
+    }
+
+    public static int sumOfPrimesWithDigit5(int n) {
+        int sum = 0;
+        for (int i = 5; i <= n; i++) {
+            if (containsDigit5(i) && isPrime(i)) {
+                sum += i;
+            }
         }
+        return sum;
+    }
+
+    private static boolean containsDigit5(int number) {
+        while (number > 0) {
+            if (number % 10 == 5) {
+                return true;
+            }
+            number /= 10;
+        }
+        return false;
+    }
+
+    private static boolean isPrime(int num) {
+        if (num < 2) {
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }
